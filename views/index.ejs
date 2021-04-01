@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo Application</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,7 +22,12 @@
     <title>ToDo Application</title>
 </head>
 <body>
-    <h1>Current To-dos</h1>
+    <div>
+        <h1>To do List</h1>
+        <h4>04/01/2021</h4>
+    </div>
+
+    <h2>Priorities</h2>
     <ul class="todos">
     <% for(let i=0; i < info.length; i++) {%>
         <li class='todo<%= info[i].todo_checked ? " checked" : "" %>'>
@@ -30,7 +39,7 @@
     <% } %>
     </ul>
 
-    <h2>Add a To-do:</h2>
+    <h3>Add a To-do:</h3>
 
     <form action="/addTodo" method="POST">
         <input type="text" placeholder="todo" name="todo_item">
@@ -38,6 +47,7 @@
         <input type="submit">
     </form>
     
+    <blockquote>"Focus on getting started or progressing and not on completing the task."</blockquote>
 
     <script src='js/main.js'></script>
 </body>
