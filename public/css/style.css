@@ -39,3 +39,8 @@ blockquote{
     text-align: center;
     border: 1px dashed gray;
 }
+
+.wrapper{
+    max-width: 30%;
+    margin: 0 auto;
+}

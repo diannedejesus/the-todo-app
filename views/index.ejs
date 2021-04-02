@@ -13,42 +13,34 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo Application</title>
-</head>
-<body>
-    <div>
-        <h1>To do List</h1>
-        <h4>04/01/2021</h4>
+    <div class="wrapper">
+        <div>
+            <h1>To do List</h1>
+            <h4>04/01/2021</h4>
+        </div>
+
+        <h2>Priorities</h2>
+        <ul class="todos">
+        <% for(let i=0; i < info.length; i++) {%>
+            <li class='todo<%= info[i].todo_checked ? " checked" : "" %>'>
+                <span><%= info[i].todo_item %></span>
+                <span><%= info[i].date_item %></span>
+                <span class='<%= info[i].todo_checked ? "fas fa-check-square" : "far fa-check-square" %>'></span>
+                <span class='fa fa-trash'></span>
+            </li>
+        <% } %>
+        </ul>
+
+        <h3>Add a To-do:</h3>
+
+        <form action="/addTodo" method="POST">
+            <input type="text" placeholder="todo" name="todo_item">
+            <input type="date" name="todo_date">
+            <input type="submit">
+        </form>
+        
+        <blockquote>"Focus on getting started or progressing and not on completing the task."</blockquote>
     </div>
-
-    <h2>Priorities</h2>
-    <ul class="todos">
-    <% for(let i=0; i < info.length; i++) {%>
-        <li class='todo<%= info[i].todo_checked ? " checked" : "" %>'>
-            <span><%= info[i].todo_item %></span>
-            <span><%= info[i].date_item %></span>
-            <span class='<%= info[i].todo_checked ? "fas fa-check-square" : "far fa-check-square" %>'></span>
-            <span class='fa fa-trash'></span>
-        </li>
-    <% } %>
-    </ul>
-
-    <h3>Add a To-do:</h3>
-
-    <form action="/addTodo" method="POST">
-        <input type="text" placeholder="todo" name="todo_item">
-        <input type="date" name="todo_date">
-        <input type="submit">
-    </form>
-    
-    <blockquote>"Focus on getting started or progressing and not on completing the task."</blockquote>
-
     <script src='js/main.js'></script>
 </body>
 </html>
