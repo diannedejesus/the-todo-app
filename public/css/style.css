@@ -1,6 +1,47 @@
-body{
-    font-family: 'Oxygen', sans-serif;
-}
+/* Box Model Hack */
+* {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  
+  /* Clear fix hack */
+  .clearfix:after {
+       content: ".";
+       display: block;
+       clear: both;
+       visibility: hidden;
+       line-height: 0;
+       height: 0;
+  }
+  
+  .clear {
+      clear: both;
+  }
+  
+  /******************************************
+  /* BASE STYLES
+  /*******************************************/
+  
+    body{
+        font-family: 'Oxygen', sans-serif;
+    }
+  
+  
+  /******************************************
+  /* LAYOUT
+  /*******************************************/
+  header {
+  
+  }
+  
+  footer {
+  
+  }
+  
+  /******************************************
+  /* ADDITIONAL STYLES
+  /*******************************************/
 .checked{
     text-decoration: line-through;
 }
@@ -17,8 +58,8 @@ h1{
 h4{
     float: left;
     font-size: .8em;
-    margin-top: -1.5em;
-    margin-left: 13.5em;
+    margin-top: -.9em;
+    margin-left: 13.4em;
 }
 
 h2{
@@ -40,7 +81,32 @@ blockquote{
     border: 1px dashed gray;
 }
 
-.wrapper{
-    max-width: 30%;
-    margin: 0 auto;
+.completed, .events h2{
+    border: none;
+    color: white;
+    background-color: black;
+}
+
+.events > section{
+    border: 1px solid black;
+    width: 33.33%;
+    height: 10em;
+    padding: 5px;
+}
+
+.events .date{
+    float: right;
+}
+
+.fa-plus-square{
+    float: right;
+    font-size: 2rem;
+    margin-bottom: -2em;
+}
+
+@media screen and (min-width: 600px) {
+    .wrapper{
+        max-width: 30em;
+        margin: 0 auto;
+    }
 }

@@ -23,14 +23,20 @@ app.use(express.json())
 
 app.get('/', (request, response) => {
     db.collection('items').find().sort({date: -1}).toArray()
-    .then(data => {
+    .then(data => { 
         response.render('index.ejs', { info: data })
     })
     .catch(error => console.error(error))
 })
 
 app.post('/addTodo', (request, response) => {
-    db.collection('items').insertOne({todo_item: request.body.todo_item, date_item: request.body.todo_date, todo_checked: false})
+    //console.log(request.body.todo_tag)
+    db.collection('items').insertOne({
+        todo_item: request.body.todo_item, 
+        date_item: request.body.todo_date,
+        todo_tag: request.body.todo_tag, 
+        todo_checked: false
+    })
     .then(result => {
         console.log('To do added')
         response.redirect('/')
@@ -48,11 +54,9 @@ app.delete('/deleteTodo', (request, response) => {
 })
 
 app.put('/markCompleted', (request, response) => {
-    console.log(request.body.todo_checked)
-    console.log(!request.body.todo_checked)
-    db.collection('items').updateOne({todo_item: request.body.todo_item, date_item: request.body.item_date, todo_checked: request.body.todo_checked},{
+    db.collection('items').updateOne({todo_item: request.body.todo_item},{
         $set: {
-            todo_checked: !request.body.todo_checked
+            todo_checked: request.body.todo_checked
           }
     },{
         sort: {_id: -1},

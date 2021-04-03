@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo Application</title>
+    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
@@ -19,23 +20,61 @@
             <h4>04/01/2021</h4>
         </div>
 
+        <div id="addButton" class="clearfix"><span class="far fa-plus-square"></span></div>
+
         <h2>Priorities</h2>
         <ul class="todos">
         <% for(let i=0; i < info.length; i++) {%>
-            <li class='todo<%= info[i].todo_checked ? " checked" : "" %>'>
-                <span><%= info[i].todo_item %></span>
-                <span><%= info[i].date_item %></span>
-                <span class='<%= info[i].todo_checked ? "fas fa-check-square" : "far fa-check-square" %>'></span>
+            <% if(info[i].todo_checked === false && info[i].todo_tag !== "event") {%>
+            <li class='todo'>
+                <span class='far fa-square'></span>
+                <span class="item"><%= info[i].todo_item %></span>
+                <span class="date"><%= info[i].date_item %></span>
                 <span class='fa fa-trash'></span>
             </li>
+            <% } %>
         <% } %>
         </ul>
+
+        <h2 class="completed">Completed</h2>
+        <ul class="todos">
+        <% for(let i=0; i < info.length; i++) {%>
+            <% if(info[i].todo_checked === true) {%>
+            <li class='todo checked'>
+                <span class='far fa-check-square'></span>
+                <span class="item"><%= info[i].todo_item %></span>
+                <span class="date"><%= info[i].date_item %></span>
+                <span class='fa fa-trash'></span>
+            </li>
+            <% } %>
+        <% } %>
+        </ul>
+
+        <section class="events">
+        <h2>Events</h2>
+        <% for(let i=0; i < info.length; i++) {%>
+            <% if(info[i].todo_tag === "event" && info[i].todo_checked === false) {%>
+            <section>
+                <span class='far fa-square'></span><span class='fa fa-trash'></span>
+                <span class="date"><%= info[i].date_item %></span>
+                <p class="item"><%= info[i].todo_item %></p>
+            </section>
+            <% } %>
+        <% } %>
+        </section>
 
         <h3>Add a To-do:</h3>
 
         <form action="/addTodo" method="POST">
             <input type="text" placeholder="todo" name="todo_item">
             <input type="date" name="todo_date">
+            <select name='todo_tag'>
+                <option value=""></option>
+                <option value="event">Event</option>
+                <!--<option value="priority">Priority</option>
+                <option value="additional">Additional</option>
+                <option value="break">Break</option>-->
+            </select>
             <input type="submit">
         </form>
         

@@ -1,5 +1,5 @@
 const deleteText = document.querySelectorAll('.fa-trash')
-const checkText = document.querySelectorAll('.fa-check-square')
+const checkText = document.querySelectorAll('.far')
 
 Array.from(deleteText).forEach((element)=>{
     element.addEventListener('click', deleteTodoItem)
@@ -10,8 +10,8 @@ Array.from(checkText).forEach((element)=>{
 })
 
 async function deleteTodoItem(){
-    const tItem = this.parentNode.childNodes[1].innerText
-    const tDate = this.parentNode.childNodes[3].innerText
+    const tItem = this.parentNode.querySelectorAll('.item')[0].innerText
+    const tDate = this.parentNode.querySelectorAll('.date')[0].innerText
     try{
         const response = await fetch('/deleteTodo', {
             method: 'delete',
@@ -31,10 +31,10 @@ async function deleteTodoItem(){
 }
 
 async function checkTodoItem(){
-    const todo_item = this.parentNode.childNodes[1].innerText
-    const item_date = this.parentNode.childNodes[3].innerText
-    const todo_checked = this.parentNode.childNodes[5].classList.contains("fas")
-    console.log(todo_checked)
+    const todo_item = this.parentNode.querySelectorAll('.item')[0].innerText
+    const item_date = this.parentNode.querySelectorAll('.date')[0].innerText
+    const todo_checked = this.parentNode.querySelectorAll('.fa-square')[0]
+
     try{
         const response = await fetch('markCompleted', {
             method: 'put',
@@ -42,7 +42,7 @@ async function checkTodoItem(){
             body: JSON.stringify({
               'todo_item': todo_item,
               'item_date': item_date,
-              'todo_checked': todo_checked
+              'todo_checked': !!todo_checked
             })
           })
         const data = await response.json()
