@@ -93,7 +93,7 @@
 
     .events > section{
         border: 1px solid black;
-        width: 33.33%;
+        width: 29%;
         height: 10em;
         padding: 5px;
     }
@@ -105,19 +105,38 @@
     .fa-plus-square{
         float: right;
         font-size: 2rem;
-        margin-bottom: -2em;
+    }
+
+    .fa-star{
+        display: block;
+    }
+
+    .events > section{
+        float: left;
+        margin-left: 1em;
     }
 
     #editTodo{
         display: none;
-        position: fixed;
-        right: 0;
-        width: 30%;
-        height: 10em;
-        border: 1px solid black;
+        float: right;
+        right: 12.5em;
+        width: 10em;
+        height: fit-content;
+        border: 2px solid black;
         background-color: white;
     }
 
+    #editTodo h3{
+        margin-top: 0;
+    }
+
+    #editTodo li{
+        margin-bottom: .5em;
+    }
+
+    #priority{
+        margin-top: 1.5em;
+    }
 @media screen and (min-width: 600px) {
     .wrapper{
         max-width: 30em;

@@ -17,23 +17,23 @@
     <div class="wrapper">
         <div>
             <h1>To do List</h1>
-            <h4>04/03/2021</h4>
+            <h4><%= `${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}` %></h4>
         </div>
-
-        <div id="addButton" class="clearfix"><span class="addButton far fa-plus-square"></span></div>
+        
+        <span class="addButton far fa-plus-square"></span>
         <section id="editTodo">
             <h3>All Tasks</h3>
             <ul id='additonalItems'></ul>
         </section>
-
-        <h2>Priorities</h2>
+        
+        <h2 id='priority'>Priorities</h2>
         <ul class="todos">
         <% for(let i=0; i < info.length; i++) {%>
             <% if(info[i].todo_checked === false && info[i].todo_tag === "priority") {%>
             <li class='todo'>
                 <span class='checkbox far fa-square'></span>
                 <span class="item"><%= info[i].todo_item %></span>
-                <span class="date"><%= info[i].date_item %></span>
+                <span class="date"><%= `${new Date(info[i].date_item).getMonth()+1}/${new Date(info[i].date_item).getDate()}/${new Date(info[i].date_item).getFullYear()}` %></span>
                 <span class='fa fa-trash'></span>
             </li>
             <% } %>
@@ -47,22 +47,24 @@
             <li class='todo checked'>
                 <span class='checkbox far fa-check-square'></span>
                 <span class="item"><%= info[i].todo_item %></span>
-                <span class="date"><%= info[i].date_item %></span>
+                <span class="date"><%= `${new Date(info[i].date_item).getMonth()+1}/${new Date(info[i].date_item).getDate()}/${new Date(info[i].date_item).getFullYear()}` %></span>
                 <span class='fa fa-trash'></span>
             </li>
             <% } %>
         <% } %>
         </ul>
 
-        <section class="events">
+        <section class="events clearfix">
         <h2>Events</h2>
+        <% let counter=0 %>
         <% for(let i=0; i < info.length; i++) {%>
-            <% if(info[i].todo_tag === "event" && info[i].todo_checked === false) {%>
+            <% if(info[i].todo_tag === "event" && info[i].todo_checked === false && counter < 3) {%>
             <section>
                 <span class='checkbox far fa-square'></span><span class='fa fa-trash'></span>
-                <span class="date"><%= info[i].date_item %></span>
+                <span class="date"><%= `${new Date(info[i].date_item).getMonth()+1}/${new Date(info[i].date_item).getDate()}/${new Date(info[i].date_item).getFullYear()}` %></span>
                 <p class="item"><%= info[i].todo_item %></p>
             </section>
+            <% counter++ %>
             <% } %>
         <% } %>
         </section>

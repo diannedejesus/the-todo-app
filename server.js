@@ -23,7 +23,7 @@ app.use(express.json())
 
 app.get('/', async (request, response) => {
     try{
-        const todoItems = await db.collection('items').find().sort({date: -1}).toArray()
+        const todoItems = await db.collection('items').find().sort({date_item: -1}).toArray()
         response.render('index.ejs', { info: todoItems })
     }catch(err) {
         console.error(err)
@@ -31,7 +31,7 @@ app.get('/', async (request, response) => {
 })
 app.get('/getAdditional', async (request, response) => {
     try{
-        const todoItems = await db.collection('items').find().sort({date: -1}).toArray()
+        const todoItems = await db.collection('items').find().sort({date_item: -1}).toArray()
         //response.render('index.ejs', { info: todoItems })
         response.json(todoItems)
         //console.log(todoItems)
@@ -44,7 +44,7 @@ app.post('/addTodo', (request, response) => {
     //console.log(request.body.todo_tag)
     db.collection('items').insertOne({
         todo_item: request.body.todo_item, 
-        date_item: request.body.todo_date,
+        date_item: request.body.todo_date ? new Date(request.body.todo_date) : new Date(),
         todo_tag: request.body.todo_tag, 
         todo_checked: false
     })
