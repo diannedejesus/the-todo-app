@@ -17,17 +17,21 @@
     <div class="wrapper">
         <div>
             <h1>To do List</h1>
-            <h4>04/01/2021</h4>
+            <h4>04/03/2021</h4>
         </div>
 
-        <div id="addButton" class="clearfix"><span class="far fa-plus-square"></span></div>
+        <div id="addButton" class="clearfix"><span class="addButton far fa-plus-square"></span></div>
+        <section id="editTodo">
+            <h3>All Tasks</h3>
+            <ul id='additonalItems'></ul>
+        </section>
 
         <h2>Priorities</h2>
         <ul class="todos">
         <% for(let i=0; i < info.length; i++) {%>
-            <% if(info[i].todo_checked === false && info[i].todo_tag !== "event") {%>
+            <% if(info[i].todo_checked === false && info[i].todo_tag === "priority") {%>
             <li class='todo'>
-                <span class='far fa-square'></span>
+                <span class='checkbox far fa-square'></span>
                 <span class="item"><%= info[i].todo_item %></span>
                 <span class="date"><%= info[i].date_item %></span>
                 <span class='fa fa-trash'></span>
@@ -41,7 +45,7 @@
         <% for(let i=0; i < info.length; i++) {%>
             <% if(info[i].todo_checked === true) {%>
             <li class='todo checked'>
-                <span class='far fa-check-square'></span>
+                <span class='checkbox far fa-check-square'></span>
                 <span class="item"><%= info[i].todo_item %></span>
                 <span class="date"><%= info[i].date_item %></span>
                 <span class='fa fa-trash'></span>
@@ -55,7 +59,7 @@
         <% for(let i=0; i < info.length; i++) {%>
             <% if(info[i].todo_tag === "event" && info[i].todo_checked === false) {%>
             <section>
-                <span class='far fa-square'></span><span class='fa fa-trash'></span>
+                <span class='checkbox far fa-square'></span><span class='fa fa-trash'></span>
                 <span class="date"><%= info[i].date_item %></span>
                 <p class="item"><%= info[i].todo_item %></p>
             </section>
@@ -71,9 +75,9 @@
             <select name='todo_tag'>
                 <option value=""></option>
                 <option value="event">Event</option>
-                <!--<option value="priority">Priority</option>
+                <option value="priority">Priority</option>
                 <option value="additional">Additional</option>
-                <option value="break">Break</option>-->
+                <!--<option value="break">Break</option>-->
             </select>
             <input type="submit">
         </form>

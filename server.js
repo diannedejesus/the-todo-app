@@ -21,12 +21,23 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true}))
 app.use(express.json())
 
-app.get('/', (request, response) => {
-    db.collection('items').find().sort({date: -1}).toArray()
-    .then(data => { 
-        response.render('index.ejs', { info: data })
-    })
-    .catch(error => console.error(error))
+app.get('/', async (request, response) => {
+    try{
+        const todoItems = await db.collection('items').find().sort({date: -1}).toArray()
+        response.render('index.ejs', { info: todoItems })
+    }catch(err) {
+        console.error(err)
+    }
+})
+app.get('/getAdditional', async (request, response) => {
+    try{
+        const todoItems = await db.collection('items').find().sort({date: -1}).toArray()
+        //response.render('index.ejs', { info: todoItems })
+        response.json(todoItems)
+        //console.log(todoItems)
+    }catch(err) {
+        console.error(err)
+    }
 })
 
 app.post('/addTodo', (request, response) => {
@@ -51,6 +62,24 @@ app.delete('/deleteTodo', (request, response) => {
         response.json('Item Deleted')
     })
     .catch(error => console.error(error))
+})
+
+
+app.put('/changePriority', (request, response) => {
+    db.collection('items').updateOne({todo_item: request.body.todo_item},{
+        $set: {
+            todo_tag: request.body.todo_tag
+          }
+    },{
+        sort: {_id: -1},
+        //upsert: true
+    })
+    .then(result => {
+        console.log('Changed Priority')
+        response.json('Changed Priority')
+    })
+    .catch(error => console.error(error))
+
 })
 
 app.put('/markCompleted', (request, response) => {

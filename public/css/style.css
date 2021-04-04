@@ -19,18 +19,17 @@
       clear: both;
   }
   
-  /******************************************
-  /* BASE STYLES
-  /*******************************************/
+/******************************************
+/* BASE STYLES
+/*******************************************/
   
     body{
         font-family: 'Oxygen', sans-serif;
     }
-  
-  
-  /******************************************
-  /* LAYOUT
-  /*******************************************/
+
+/******************************************
+/* LAYOUT
+/*******************************************/
   header {
   
   }
@@ -39,70 +38,85 @@
   
   }
   
-  /******************************************
-  /* ADDITIONAL STYLES
-  /*******************************************/
-.checked{
-    text-decoration: line-through;
-}
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+    .wrapper{
+        max-width: 95%;
+        margin: 0 auto;
+    }
 
-h1, h4{
-    font-family: 'Pattaya', sans-serif;
-}
+    .checked{
+        text-decoration: line-through;
+    }
 
-h1{
-    font-size: 3.5em;
-    margin-bottom: 0;
-}
+    h1, h4{
+        font-family: 'Pattaya', sans-serif;
+    }
 
-h4{
-    float: left;
-    font-size: .8em;
-    margin-top: -.9em;
-    margin-left: 13.4em;
-}
+    h1{
+        font-size: 3.5em;
+        margin-bottom: 0;
+    }
 
-h2{
-    padding-left: 5px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-}
+    h4{
+        float: left;
+        font-size: .8em;
+        margin-top: -.9em;
+        margin-left: 13.4em;
+    }
 
-h3{
-    padding-left: 5px;
-    background: #000;
-    color: white;
-}
+    h2{
+        padding-left: 5px;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
 
-blockquote{
-    margin-top: 40px;
-    padding: 10px;
-    text-align: center;
-    border: 1px dashed gray;
-}
+    h3{
+        padding-left: 5px;
+        background: #000;
+        color: white;
+    }
 
-.completed, .events h2{
-    border: none;
-    color: white;
-    background-color: black;
-}
+    blockquote{
+        margin-top: 40px;
+        padding: 10px;
+        text-align: center;
+        border: 1px dashed gray;
+    }
 
-.events > section{
-    border: 1px solid black;
-    width: 33.33%;
-    height: 10em;
-    padding: 5px;
-}
+    .completed, .events h2{
+        border: none;
+        color: white;
+        background-color: black;
+    }
 
-.events .date{
-    float: right;
-}
+    .events > section{
+        border: 1px solid black;
+        width: 33.33%;
+        height: 10em;
+        padding: 5px;
+    }
 
-.fa-plus-square{
-    float: right;
-    font-size: 2rem;
-    margin-bottom: -2em;
-}
+    .events .date{
+        float: right;
+    }
+
+    .fa-plus-square{
+        float: right;
+        font-size: 2rem;
+        margin-bottom: -2em;
+    }
+
+    #editTodo{
+        display: none;
+        position: fixed;
+        right: 0;
+        width: 30%;
+        height: 10em;
+        border: 1px solid black;
+        background-color: white;
+    }
 
 @media screen and (min-width: 600px) {
     .wrapper{
