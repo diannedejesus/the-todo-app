@@ -1,0 +1,167 @@
+/* Box Model Hack */
+* {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  
+  /* Clear fix hack */
+  .clearfix:after {
+       content: ".";
+       display: block;
+       clear: both;
+       visibility: hidden;
+       line-height: 0;
+       height: 0;
+  }
+  
+  .clear {
+      clear: both;
+  }
+  
+/******************************************
+/* BASE STYLES
+/*******************************************/
+  
+    body{
+        font-family: 'Oxygen', sans-serif;
+    }
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+  header {
+  
+  }
+  
+  footer {
+  
+  }
+  
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+    .wrapper{
+        max-width: 95%;
+        margin: 0 auto;
+    }
+
+    .checked{
+        text-decoration: line-through;
+    }
+
+    h1, h4{
+        font-family: 'Pattaya', sans-serif;
+    }
+
+    h1{
+        font-size: 3.5em;
+        margin-bottom: 0;
+    }
+
+    h4{
+        float: left;
+        font-size: .8em;
+        margin-top: -.9em;
+        margin-left: 13.4em;
+    }
+
+    h2{
+        padding-left: 5px;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    h3{
+        padding-left: 5px;
+        background: #000;
+        color: white;
+    }
+
+    blockquote{
+        margin-top: 40px;
+        padding: 10px;
+        text-align: center;
+        border: 1px dashed gray;
+    }
+
+    .completed, .events h2{
+        border: none;
+        color: white;
+        background-color: black;
+    }
+
+    .events > section{
+        border: 2px solid black;
+        width: 29%;
+        height: 10em;
+        padding: 5px;
+    }
+
+    .events .date{
+        float: right;
+    }
+
+    .fa-plus-square{
+        float: right;
+        font-size: 2rem;
+    }
+
+    .fa-star, fa-calendar{
+        display: block;
+    }
+
+    .events > section{
+        float: left;
+        margin-left: .8em;
+    }
+
+    #editTodo{
+        display: none;
+        float: right;
+        right: 12.5em;
+        width: 10em;
+        height: fit-content;
+        border: 2px solid black;
+        background-color: white;
+    }
+
+    #editTodo h3{
+        margin-top: 0;
+    }
+
+    #editTodo li{
+        margin-bottom: .5em;
+    }
+
+    #priority{
+        margin-top: 1.5em;
+    }
+
+    #addNewTodo label{
+        display: block;
+    }
+
+    #addNewTodo div{
+        display: inline-block;
+    }
+
+    #addNewTodo > input{
+        display: inline-block;
+    }
+
+    #addNewTodo input, #addNewTodo select{
+        vertical-align: bottom;
+    }
+
+    #todoDateForm{
+        font-size: .8rem;
+        max-width: 9em;
+    }
+
+@media screen and (min-width: 600px) {
+    .wrapper{
+        max-width: 30em;
+        margin: 0 auto;
+    }
+}

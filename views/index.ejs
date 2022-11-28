@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="To-do application">
+    <meta name="description" content="a to-do app">
+    <meta name="keywords" content="to-do, app, applicaiton">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <title>ToDo Application</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div>
+            <h1>To do List</h1>
+            <h4><%= `${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}` %></h4>
+        </div>
+        
+        <span class="addButton far fa-plus-square"></span>
+        <section id="editTodo">
+            <h3>All Tasks</h3>
+            <ul id='additonalItems'></ul>
+        </section>
+        
+        <h2 id='priority'>Priorities</h2>
+        <ul class="todos">
+        <% for(let i=0; i < info.length; i++) {%>
+            <% if(info[i].todo_checked === false && info[i].todo_tag === "priority") {%>
+            <li class='todo'>
+                <span class='checkbox far fa-square'></span>
+                <span class="item"><%= info[i].todo_item %></span>
+                <span class="date"><%= `${new Date(info[i].date_item).getMonth()+1}/${new Date(info[i].date_item).getDate()}/${new Date(info[i].date_item).getFullYear()}` %></span>
+                <span class='fa fa-trash'></span>
+            </li>
+            <% } %>
+        <% } %>
+        </ul>
+
+        <h2 class="completed">Completed</h2>
+        <ul class="todos">
+        <% for(let i=0; i < info.length; i++) {%>
+            <% if(info[i].todo_checked === true) {%>
+            <li class='todo checked'>
+                <span class='checkbox far fa-check-square'></span>
+                <span class="item"><%= info[i].todo_item %></span>
+                <span class="date"><%= `${new Date(info[i].date_item).getMonth()+1}/${new Date(info[i].date_item).getDate()}/${new Date(info[i].date_item).getFullYear()}` %></span>
+                <span class='fa fa-trash'></span>
+            </li>
+            <% } %>
+        <% } %>
+        </ul>
+
+        <section class="events clearfix">
+        <h2>Events</h2>
+        <% let counter=0 %>
+        <% for(let i=0; i < info.length; i++) {%>
+            <% if(info[i].todo_tag === "event" && info[i].todo_checked === false && counter < 3) {%>
+            <section>
+                <span class='checkbox far fa-square'></span><span class='fa fa-trash'></span>
+                <span class="date"><%= `${new Date(info[i].date_item).getMonth()+1}/${new Date(info[i].date_item).getDate()}/${new Date(info[i].date_item).getFullYear()}` %></span>
+                <p class="item"><%= info[i].todo_item %></p>
+            </section>
+            <% counter++ %>
+            <% } %>
+        <% } %>
+        </section>
+
+        <h3>Add a To-do:</h3>
+
+        <form id='addNewTodo' action="/addTodo" method="POST">
+            <div>
+                <label for='todoItemForm'>New item</label>
+                <input id='todoItemForm' type="text" placeholder="todo" name="todo_item">
+            </div>
+            <div>
+                <label for='todoDateForm'>Due date</label>
+                <input id='todoDateForm' type="date" name="todo_date">
+            </div>
+            <div>
+                <label for='todoTypeForm'>Type</label>
+                <select id='todoTypeForm' name='todo_tag'>
+                    <option value="priority">Priority</option>
+                    <option value="additional">Additional</option>
+                    <option value="event">Event</option>
+                    <!--<option value="break">Break</option>-->
+                </select>
+            </div>
+            <input type="submit">
+        </form>
+        
+        <blockquote>"Focus on getting started or progressing and not on completing the task."</blockquote>
+    </div>
+    <script src='js/main.js'></script>
+</body>
+</html>
