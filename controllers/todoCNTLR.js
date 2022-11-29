@@ -24,6 +24,15 @@ module.exports = {
         }
     },
 
+    getOtherTodo: async (req, res) => {
+        try{
+            const todoItems = await db.collection('items').find().sort({date_item: -1}).toArray()
+            res.json(todoItems)
+        }catch(err) {
+            console.error(err)
+        }
+    },
+
 
     addTodo: (req, res) => {
         console.log(req.body.todo_items)
@@ -39,6 +48,53 @@ module.exports = {
             res.redirect('/')
         })
         .catch(error => console.error(error))
-    }
+    },
+
+    deleteTodo: (req, res) => {
+        db.collection('items').deleteOne({todo_item: req.body.todo_item})
+        .then(result => {
+            console.log('Item Deleted')
+            res.json('Item Deleted')
+        })
+        .catch(error => console.error(error))
+    },
+
+
+    changeTodoPriority: (req, res) => {
+        const todoItem = req.body.todo_item
+        db.collection('items').updateOne({todo_item: todoItem},{
+            $set: {
+                todo_tag: req.body.todo_tag
+              }
+        },{
+            sort: {_id: -1},
+            //upsert: true
+        })
+        .then(result => {
+            console.log('Changed Priority')
+            res.json('Changed Priority')
+        })
+        .catch(error => console.error(error))
+    },
+
+    markTodoCompleted: (req, res) => {
+        console.log(req.body.todo_item)
+            db.collection('items').updateOne({todo_item: req.body.todo_item},{
+                $set: {
+                    todo_checked: req.body.todo_checked
+                  }
+            },{
+                sort: {_id: -1},
+                //upsert: true
+            })
+            .then(result => {
+                console.log('Marked as completed')
+                res.json('Marked as completed')
+            })
+            .catch(error => console.error(error))
+        },
+        
+
+
  
 }
