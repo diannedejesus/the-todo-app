@@ -2,6 +2,9 @@ const express = require('express')
 const app = express()
 const MongoClient = require('mongodb').MongoClient
 const PORT = 3000
+
+const indexRouter = require('./routes/todoRTE');
+
 require('dotenv').config()
 
 let db,
@@ -13,22 +16,25 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
         console.log(`Connected to ${dbName} Database`)
         db = client.db(dbName)
     })
-    .catch(error => console.error(error))        
+    .catch(error => console.error(error))
+
     
+
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true}))
 app.use(express.json())
 
+app.use('/', indexRouter);
 
-app.get('/', async (request, response) => {
-    try{
-        const todoItems = await db.collection('items').find().sort({date_item: 1}).toArray()
-        response.render('index.ejs', { info: todoItems })
-    }catch(err) {
-        console.error(err)
-    }
-})
+// app.get('/', async (request, response) => {
+//     try{
+//         const todoItems = await db.collection('items').find().sort({date_item: 1}).toArray()
+//         response.render('index.ejs', { info: todoItems })
+//     }catch(err) {
+//         console.error(err)
+//     }
+// })
 app.get('/getAdditional', async (request, response) => {
     try{
         const todoItems = await db.collection('items').find().sort({date_item: -1}).toArray()
@@ -40,21 +46,21 @@ app.get('/getAdditional', async (request, response) => {
     }
 })
 
-app.post('/addTodo', (request, response) => {
-    console.log(request.body.todo_items)
-    let modifiedTodoItem = request.body.todo_item.replace(/\s+/g, ' ').trim()
-    db.collection('items').insertOne({
-        todo_item: modifiedTodoItem, //.replace(/\s+/g, ' ').trim(), 
-        date_item: request.body.todo_date ? new Date(request.body.todo_date) : new Date(),
-        todo_tag: request.body.todo_tag, 
-        todo_checked: false
-    })
-    .then(result => {
-        console.log('To do added')
-        response.redirect('/')
-    })
-    .catch(error => console.error(error))
-})
+// app.post('/addTodo', (request, response) => {
+//     console.log(request.body.todo_items)
+//     let modifiedTodoItem = request.body.todo_item.replace(/\s+/g, ' ').trim()
+//     db.collection('items').insertOne({
+//         todo_item: modifiedTodoItem, //.replace(/\s+/g, ' ').trim(), 
+//         date_item: request.body.todo_date ? new Date(request.body.todo_date) : new Date(),
+//         todo_tag: request.body.todo_tag, 
+//         todo_checked: false
+//     })
+//     .then(result => {
+//         console.log('To do added')
+//         response.redirect('/')
+//     })
+//     .catch(error => console.error(error))
+// })
 
 app.delete('/deleteTodo', (request, response) => {
     db.collection('items').deleteOne({todo_item: request.body.todo_item})
@@ -85,7 +91,7 @@ app.put('/changePriority', (request, response) => {
 })
 
 app.put('/markCompleted', (request, response) => {
-    console.log(request.body.todo_item)
+console.log(request.body.todo_item)
     db.collection('items').updateOne({todo_item: request.body.todo_item},{
         $set: {
             todo_checked: request.body.todo_checked
