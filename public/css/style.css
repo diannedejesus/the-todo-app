@@ -41,125 +41,138 @@
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
-    .wrapper{
-        max-width: 95%;
-        margin: 0 auto;
-    }
+.fa{
+    font-size: .8rem;
+}
 
-    .checked{
-        text-decoration: line-through;
-    }
+.todos{
+    list-style: none;
+    padding-left: .8em;
+}
 
-    h1, h4{
-        font-family: 'Pattaya', sans-serif;
-    }
+.todo{
+    margin-bottom: .5rem;
+}
 
-    h1{
-        font-size: 3.5em;
-        margin-bottom: 0;
-    }
+.wrapper{
+    max-width: 95%;
+    margin: 0 auto;
+}
 
-    h4{
-        float: left;
-        font-size: .8em;
-        margin-top: -.9em;
-        margin-left: 13.4em;
-    }
+.checked{
+    text-decoration: line-through;
+}
 
-    h2{
-        padding-left: 5px;
-        border: none;
-        color: white;
-        background-color: black;
-    }
+h1, h4{
+    font-family: 'Pattaya', sans-serif;
+}
 
-    h3{
-        padding-left: 5px;
-        background: rgb(37, 37, 37);
-        color: white;
-    }
+h1{
+    font-size: 3.5em;
+    margin-bottom: 0;
+}
 
-    blockquote{
-        margin-top: 40px;
-        padding: 10px;
-        text-align: center;
-        border: 1px dashed gray;
-    }
+h4{
+    float: left;
+    font-size: .8em;
+    margin-top: -.9em;
+    margin-left: 13.4em;
+}
 
-    .completed, .events h2{
-        color: grey;
-        background-color: rgb(236, 236, 236);
-    }
+h2{
+    padding-left: 5px;
+    border: none;
+    color: white;
+    background-color: black;
+}
+
+h3{
+    padding-left: 5px;
+    background: rgb(37, 37, 37);
+    color: white;
+}
+
+blockquote{
+    margin-top: 40px;
+    padding: 10px;
+    text-align: center;
+    border: 1px dashed gray;
+}
+
+.completed, .events h2{
+    color: grey;
+    background-color: rgb(236, 236, 236);
+}
 
 
-    .events > section{
-        border: 2px solid black;
-        width: 29%;
-        height: 6em;
-        padding: 5px;
-    }
+.events > section{
+    border: 2px solid black;
+    width: 29%;
+    height: 6em;
+    padding: 5px;
+}
 
-    .events .date{
-        float: right;
-    }
+.events .date{
+    float: right;
+}
 
-    
-    .fa-plus-square{
-        float: right;
-        font-size: 2rem;
-    }
 
-    .fa-star, fa-calendar{
-        display: block;
-    }
+.fa-plus-square{
+    float: right;
+    font-size: 2rem;
+}
 
-    .events > section{
-        float: left;
-        margin-left: .8em;
-    }
+.fa-star, fa-calendar{
+    display: block;
+}
 
-    #editTodo{
-        display: none;
-        float: right;
-        right: 12.5em;
-        width: 10em;
-        height: fit-content;
-        border: 2px solid black;
-        background-color: white;
-    }
+.events > section{
+    float: left;
+    margin-left: .8em;
+}
 
-    #editTodo h3{
-        margin-top: 0;
-    }
+#editTodo{
+    display: none;
+    float: right;
+    right: 12.5em;
+    width: 10em;
+    height: fit-content;
+    border: 2px solid black;
+    background-color: white;
+}
 
-    #editTodo li{
-        margin-bottom: .5em;
-    }
+#editTodo h3{
+    margin-top: 0;
+}
 
-    #priority{
-        margin-top: 1.5em;
-    }
+#editTodo li{
+    margin-bottom: .5em;
+}
 
-    #addNewTodo label{
-        display: block;
-    }
+#priority{
+    margin-top: 1.5em;
+}
 
-    #addNewTodo div{
-        display: inline-block;
-    }
+#addNewTodo label{
+    display: block;
+}
 
-    #addNewTodo > input{
-        display: inline-block;
-    }
+#addNewTodo div{
+    display: inline-block;
+}
 
-    #addNewTodo input, #addNewTodo select{
-        vertical-align: bottom;
-    }
+#addNewTodo > input{
+    display: inline-block;
+}
 
-    #todoDateForm{
-        font-size: .8rem;
-        max-width: 9em;
-    }
+#addNewTodo input, #addNewTodo select{
+    vertical-align: bottom;
+}
+
+#todoDateForm{
+    font-size: .8rem;
+    max-width: 9em;
+}
 
 @media screen and (min-width: 600px) {
     .wrapper{

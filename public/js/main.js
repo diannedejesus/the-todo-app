@@ -1,4 +1,5 @@
 const deleteText = document.querySelectorAll('.fa-trash')
+const editText = document.querySelectorAll('.fa-pen')
 const checkText = document.querySelectorAll('.checkbox')
 document.querySelector('.addButton').addEventListener('click', editTodo)
 //document.querySelector('.menuButton').addEventListener('click', showAdditionalTasks)
@@ -9,6 +10,10 @@ Array.from(deleteText).forEach((element)=>{
 
 Array.from(checkText).forEach((element)=>{
     element.addEventListener('click', checkTodoItem)
+})
+
+Array.from(editText).forEach((element)=>{
+    element.addEventListener('click', editMode)
 })
 
 async function deleteTodoItem(){
@@ -139,4 +144,68 @@ async function togglePriority(){
     }catch(err){
         console.log(err)
     }
+}
+
+
+
+
+async function editMode(){
+    const currentNode = this.parentElement
+    const todoText = document.createElement("input")
+    const todoCheckbox = document.createElement("input")
+    const todoDate = document.createElement("input")
+    const submitButton = document.createElement("input")
+    submitButton.type = "submit"
+    const cancelButton = document.createElement("input")
+    cancelButton.type = "button"
+    cancelButton.value = "cancel"
+
+    for(let items of this.parentNode.children){
+        if(items.classList.contains('fa-square') || items.classList.contains('fa-check-square')){
+            todoCheckbox.type = 'checkbox'
+        }
+        
+        if(items.classList.contains('item')){
+            todoText.type = 'text'
+            todoText.value = items.innerText
+        }
+
+        if(items.classList.contains('date')){
+            const currentDate = new Date(items.innerText).toJSON().slice(0,10)
+            todoDate.type = 'date'
+
+            todoDate.value = `${currentDate}`
+            console.log(todoDate)
+        } 
+    }
+
+    while(currentNode.firstChild){
+        currentNode.removeChild(currentNode.firstChild)
+    }
+    
+    currentNode.appendChild(todoCheckbox)
+    currentNode.appendChild(todoText)
+    currentNode.appendChild(todoDate)
+    currentNode.appendChild(submitButton)
+    currentNode.appendChild(cancelButton)
+    //insert buttons: submit, cancel
+        //remove delete and edit button
+
+
+    // try{
+    //     const response = await fetch('editTodo', {
+    //         method: 'put',
+    //         headers: {'Content-Type': 'application/json'},
+    //         body: JSON.stringify({
+    //           'todo_item': todo_item,
+    //           'todo_tag': tagChange
+    //         })
+    //       })
+    //     const data = await response.json()
+    //     console.log(data)
+    //     location.reload()
+
+    // }catch(err){
+    //     console.log(err)
+    // }
 }
