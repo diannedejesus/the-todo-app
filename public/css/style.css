@@ -99,11 +99,22 @@ blockquote{
     border: 1px dashed gray;
 }
 
+.completed{
+    padding: 0 5px;
+    font-weight: bold;
+    font-size: 1.5em;
+}
 .completed, .events h2{
     color: grey;
     background-color: rgb(236, 236, 236);
 }
+.right{
+    float:right;
+}
 
+.hide{
+    display: none;
+}
 
 .events > section{
     border: 2px solid black;

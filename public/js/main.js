@@ -2,6 +2,7 @@ const deleteText = document.querySelectorAll('.fa-trash')
 const editText = document.querySelectorAll('.fa-pen')
 const checkText = document.querySelectorAll('.checkbox')
 document.querySelector('.addButton').addEventListener('click', editTodo)
+document.querySelector('.completed').addEventListener('click', hideTodos)
 //document.querySelector('.menuButton').addEventListener('click', showAdditionalTasks)
 
 Array.from(deleteText).forEach((element)=>{
@@ -146,6 +147,17 @@ async function togglePriority(){
     }
 }
 
+function hideTodos(){
+    const theTodos = this.parentElement.querySelector('.todos')
+
+    if(theTodos.classList.contains('hide')){
+        theTodos.setAttribute("class", "todos")
+    }else{
+        theTodos.setAttribute("class", "todos hide")
+    }
+    
+}
+
 
 
 
@@ -188,24 +200,4 @@ async function editMode(){
     currentNode.appendChild(todoDate)
     currentNode.appendChild(submitButton)
     currentNode.appendChild(cancelButton)
-    //insert buttons: submit, cancel
-        //remove delete and edit button
-
-
-    // try{
-    //     const response = await fetch('editTodo', {
-    //         method: 'put',
-    //         headers: {'Content-Type': 'application/json'},
-    //         body: JSON.stringify({
-    //           'todo_item': todo_item,
-    //           'todo_tag': tagChange
-    //         })
-    //       })
-    //     const data = await response.json()
-    //     console.log(data)
-    //     location.reload()
-
-    // }catch(err){
-    //     console.log(err)
-    // }
 }
