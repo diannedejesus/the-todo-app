@@ -71,7 +71,7 @@
                 <% if(info[i].todo_checked === true) {%>
                 <li class='todo checked'>
                     <span class='checkbox far fa-check-square'></span>
-                    <span class="item"><%= info[i].todo_item %></span>
+                    <span class="item" data-todoid="<%= info[i]._id %>"><%= info[i].todo_item %></span>
                     <span class="date"><%= `${new Date(info[i].date_item).getMonth()+1}/${new Date(info[i].date_item).getDate()}/${new Date(info[i].date_item).getFullYear()}` %></span>
                     <span class='fa fa-trash'></span>
                     <span class="fa fa-pen"></span>

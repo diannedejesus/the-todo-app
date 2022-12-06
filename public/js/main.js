@@ -1,7 +1,7 @@
 const deleteText = document.querySelectorAll('.fa-trash')
 const editText = document.querySelectorAll('.fa-pen')
 const checkText = document.querySelectorAll('.checkbox')
-document.querySelector('.addButton').addEventListener('click', editTodo)
+document.querySelector('.addButton').addEventListener('click', editTodoList)
 document.querySelector('.completed').addEventListener('click', hideTodos)
 //document.querySelector('.menuButton').addEventListener('click', showAdditionalTasks)
 
@@ -63,7 +63,7 @@ async function checkTodoItem(){
     }
 }
 
-function editTodo(){
+function editTodoList(){
     const menuRef = document.getElementById('editTodo')
     if(!menuRef.style.display || menuRef.style.display === 'none'){
         menuRef.style.display = 'block'
@@ -164,18 +164,26 @@ function hideTodos(){
 async function editMode(){
     const currentNode = this.parentElement
     const todoText = document.createElement("input")
+    todoText.name = 'todoitem'
     const todoHidden = document.createElement("input")
+    todoHidden.name = 'todoid'
     const todoCheckbox = document.createElement("input")
+    todoCheckbox.name = 'todocheck'
     const todoDate = document.createElement("input")
+    todoDate.name = 'tododate'
     const submitButton = document.createElement("input")
     submitButton.type = "submit"
+    submitButton.onclick = editTodo
     const cancelButton = document.createElement("input")
     cancelButton.type = "button"
     cancelButton.value = "cancel"
+    cancelButton.onclick = window.location.reload.bind(window.location)
+
 
     for(let items of this.parentNode.children){
         if(items.classList.contains('fa-square') || items.classList.contains('fa-check-square')){
             todoCheckbox.type = 'checkbox'
+            todoCheckbox.checked = items.classList.contains('fa-check-square')
         }
         
         if(items.classList.contains('item')){
@@ -188,9 +196,7 @@ async function editMode(){
         if(items.classList.contains('date')){
             const currentDate = new Date(items.innerText).toJSON().slice(0,10)
             todoDate.type = 'date'
-
             todoDate.value = `${currentDate}`
-            console.log(todoDate)
         } 
     }
 
@@ -200,7 +206,36 @@ async function editMode(){
     
     currentNode.appendChild(todoCheckbox)
     currentNode.appendChild(todoText)
+    currentNode.appendChild(todoHidden)
     currentNode.appendChild(todoDate)
     currentNode.appendChild(submitButton)
     currentNode.appendChild(cancelButton)
+}
+
+
+
+
+async function editTodo(){ 
+    const todoItem = {
+        'todo_item': this.parentElement.querySelector('input[name="todoitem"]').value,
+    //  'todo_tag': tagChange,
+        'date_item': this.parentElement.querySelector('input[name="tododate"]').value,
+        'todoid': this.parentElement.querySelector('input[name="todoid"]').value,
+        'todo_checked': this.parentElement.querySelector('input[name="todocheck"]').checked,
+    }
+    console.log(todoItem)
+    try{
+        const response = await fetch('editTodo', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify( todoItem )
+        })
+
+        const data = await response.json()
+        console.log(data)
+        location.reload()
+
+    }catch(err){
+        console.log(err)
+    }
 }

@@ -94,31 +94,24 @@ module.exports = {
             .catch(error => console.error(error))
         },
 
-    editTodo: (req, res) => {
+    editTodo: async (req, res) => {
         const todoItem = {
             todo_item: req.body.todo_item,
-            // date,
-            // status,
-            // id,
+            date_item: req.body.date_item,
+            todo_checked: req.body.todo_checked,
         }
         
         //use id to find
-        db.collection('items').updateOne({todo_item: req.body.todo_item},{
-            $set: {
-                todo_tag: req.body.todo_tag
-            }
-        },{
-            sort: {_id: -1},
-            //upsert: true
-        })
-        .then(result => {
-            console.log('Edit Todo')
-            res.json('Edit Todo')
-        })
-        .catch(error => console.error(error))
+        const test = await db.collection('items').find({_id: req.body.todoid})
+        console.log(test)
+        //     ,{
+        //     $set: todoItem
+        // })
+        // .then(result => {
+        //     console.log('Edit Todo', result)
+        //     res.json('Edit Todo')
+        // })
+        // .catch(error => console.error(error))
     },
-        
 
-
- 
 }
