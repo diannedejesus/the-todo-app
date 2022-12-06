@@ -11,4 +11,6 @@ router.delete('/deleteTodo', currentController.deleteTodo)
 router.put('/changePriority', currentController.changeTodoPriority)
 router.put('/markCompleted', currentController.markTodoCompleted)
 
+// router.put('/editTodo', currentController.editTodo)
+
 module.exports = router

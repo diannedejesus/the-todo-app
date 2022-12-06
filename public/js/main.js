@@ -164,6 +164,7 @@ function hideTodos(){
 async function editMode(){
     const currentNode = this.parentElement
     const todoText = document.createElement("input")
+    const todoHidden = document.createElement("input")
     const todoCheckbox = document.createElement("input")
     const todoDate = document.createElement("input")
     const submitButton = document.createElement("input")
@@ -180,6 +181,8 @@ async function editMode(){
         if(items.classList.contains('item')){
             todoText.type = 'text'
             todoText.value = items.innerText
+            todoHidden.type = 'hidden'
+            todoHidden.value = items.dataset.todoid
         }
 
         if(items.classList.contains('date')){

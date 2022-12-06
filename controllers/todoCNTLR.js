@@ -93,6 +93,30 @@ module.exports = {
             })
             .catch(error => console.error(error))
         },
+
+    editTodo: (req, res) => {
+        const todoItem = {
+            todo_item: req.body.todo_item,
+            // date,
+            // status,
+            // id,
+        }
+        
+        //use id to find
+        db.collection('items').updateOne({todo_item: req.body.todo_item},{
+            $set: {
+                todo_tag: req.body.todo_tag
+            }
+        },{
+            sort: {_id: -1},
+            //upsert: true
+        })
+        .then(result => {
+            console.log('Edit Todo')
+            res.json('Edit Todo')
+        })
+        .catch(error => console.error(error))
+    },
         
 
 
