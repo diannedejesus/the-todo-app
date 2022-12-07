@@ -95,6 +95,9 @@ module.exports = {
         },
 
     editTodo: async (req, res) => {
+        const ObjectId = require('mongodb').ObjectId;
+        const id = new ObjectId(req.body.todoid);
+
         const todoItem = {
             todo_item: req.body.todo_item,
             date_item: req.body.date_item,
@@ -102,16 +105,14 @@ module.exports = {
         }
         
         //use id to find
-        const test = await db.collection('items').find({_id: req.body.todoid})
-        console.log(test)
-        //     ,{
-        //     $set: todoItem
-        // })
-        // .then(result => {
-        //     console.log('Edit Todo', result)
-        //     res.json('Edit Todo')
-        // })
-        // .catch(error => console.error(error))
+        db.collection('items').updateOne({_id: id},{
+            $set: todoItem
+        })
+        .then(result => {
+            console.log('Edit Todo', result)
+            res.json('Edit Todo')
+        })
+        .catch(error => console.error(error))
     },
 
 }
