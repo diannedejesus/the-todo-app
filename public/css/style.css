@@ -127,6 +127,8 @@ blockquote{
     color: grey;
     background-color: rgb(236, 236, 236);
 }
+
+
 .right{
     float:right;
 }
@@ -164,8 +166,8 @@ blockquote{
 #editTodo{
     display: none;
     float: right;
-    right: 12.5em;
-    width: 10em;
+    right: 0;
+    min-width: 10em;
     height: fit-content;
     border: 2px solid black;
     background-color: white;

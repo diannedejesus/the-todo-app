@@ -20,13 +20,15 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <div class="wrapper">
-        <div class="clearfix">
+        <header class="clearfix">
             <h1>To do List</h1>
             <h4><%= `${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}` %></h4>
-        </div>
+            <span class="addButton far fa-plus-square clearfix"></span>
+        </header>
         
-        <span class="addButton far fa-plus-square clearfix"></span>
+        
         <section id="editTodo">
             <h3>All Tasks</h3>
             <ul id='additonalItems'></ul>
@@ -35,8 +37,8 @@
         <section class="clearfix">
             <br>
             <select>
-                <option>Debt Tracker</option>
                 <option>To Do App</option>
+                <option>Debt Tracker</option>
             </select>
             <div id='priority'>
                 <p>Priorities</p>
@@ -66,7 +68,7 @@
         
         <section>
             <div class="completed"><span>Completed</span><span class="right"><%= completedCount %></span></div>
-            <ul class="todos">
+            <ul class="todos hide">
             <% for(let i=0; i < info.length; i++) {%>
                 <% if(info[i].todo_checked === true) {%>
                 <li class='todo checked'>
@@ -117,12 +119,20 @@
                         <!--<option value="break">Break</option>-->
                     </select>
                 </div>
+                <div>
+                    <label for='todoTypeForm'>Category</label>
+                    <select id='todoTypeForm' name='todo_tag'>
+                        <option value="todoapp">To do App</option>
+                        <option value="debttracker">Debt Tracker</option>
+                    </select>
+                </div>
                 <input type="submit">
             </form>
         </section>
 
         <blockquote>"Focus on getting started or progressing and not on completing the task."</blockquote>
     </div>
+
     <script src='js/main.js'></script>
 </body>
 </html>

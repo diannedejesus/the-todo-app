@@ -97,11 +97,11 @@ module.exports = {
     editTodo: async (req, res) => {
         const ObjectId = require('mongodb').ObjectId;
         const id = new ObjectId(req.body.todoid);
-
         const todoItem = {
             todo_item: req.body.todo_item,
             date_item: req.body.date_item,
             todo_checked: req.body.todo_checked,
+            //todo_category: req.body.category
         }
         
         //use id to find
@@ -109,7 +109,7 @@ module.exports = {
             $set: todoItem
         })
         .then(result => {
-            console.log('Edit Todo', result)
+            console.log('Edit Todo')
             res.json('Edit Todo')
         })
         .catch(error => console.error(error))

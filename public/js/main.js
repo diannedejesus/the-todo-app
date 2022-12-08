@@ -30,7 +30,7 @@ async function deleteTodoItem(){
             })
           })
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
         location.reload()
 
     }catch(err){
@@ -55,7 +55,7 @@ async function checkTodoItem(){
             })
           })
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
         location.reload()
 
     }catch(err){
@@ -64,18 +64,21 @@ async function checkTodoItem(){
 }
 
 function editTodoList(){
+    console.log(this)
     const menuRef = document.getElementById('editTodo')
     if(!menuRef.style.display || menuRef.style.display === 'none'){
         menuRef.style.display = 'block'
+        menuRef.style.position = 'absolute'
     }else{
         menuRef.style.display = 'none'
+        menuRef.style.position = 'relative'
     }
     showAdditionalTasks()
 }
 
 async function showAdditionalTasks(){
     const menuRef = document.getElementById('editTodo').querySelector('#additonalItems')
-    console.log(menuRef.children)
+    // console.log(menuRef.children)
     if(menuRef.children.length !== 0){
         let emptyList = document.createElement("ul")
             emptyList.setAttribute("id", "additonalItems");
@@ -84,12 +87,12 @@ async function showAdditionalTasks(){
         try{
             const response = await fetch('getAdditional')
             const data = await response.json()
-            console.log(data)
+            // console.log(data)
             let newList = document.createElement("ul")
                 newList.setAttribute("id", "additonalItems");
             
             for(let i=0; i < data.length; i++){
-                console.log(data[i].todo_tag)
+                // console.log(data[i].todo_tag)
                 let newElement = document.createElement("li")
                 if(data[i].todo_tag === 'priority' && data[i].todo_tag !== 'event'){
                     newElement.setAttribute("class", "starButton fas fa-star");
@@ -104,7 +107,7 @@ async function showAdditionalTasks(){
 
                 newList.appendChild(newElement)
                 //document.querySelector('.starButton').addEventListener('click', togglePriority)
-                console.log(newList)
+                // console.log(newList)
             }
             //console.log(menuRef)
 
@@ -120,7 +123,7 @@ async function togglePriority(){
     let tagChange
     let todo_item = this.innerText
 
-    console.log(this.classList.contains('fas fa-star'))
+    // console.log(this.classList.contains('fas fa-star'))
     if(this.classList.contains('fa-star') && this.classList.contains('fas')){
         this.setAttribute("class", "starButton far fa-star")
         tagChange = 'additional'
@@ -139,7 +142,7 @@ async function togglePriority(){
             })
           })
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
         location.reload()
 
     }catch(err){
@@ -178,7 +181,17 @@ async function editMode(){
     cancelButton.type = "button"
     cancelButton.value = "cancel"
     cancelButton.onclick = window.location.reload.bind(window.location)
+    const selectButton = document.createElement("select")
+    selectButton.name = 'category'
+    const option = document.createElement("option")
+    const option2 = document.createElement("option")
 
+    option.value = 'todoapp'
+    option.innerText = 'To do App'
+    selectButton.appendChild(option)
+    option2.value = 'debttracker'
+    option2.innerText = 'Debt Tracker'
+    selectButton.appendChild(option2)
 
     for(let items of this.parentNode.children){
         if(items.classList.contains('fa-square') || items.classList.contains('fa-check-square')){
@@ -208,20 +221,23 @@ async function editMode(){
     currentNode.appendChild(todoText)
     currentNode.appendChild(todoHidden)
     currentNode.appendChild(todoDate)
-    currentNode.appendChild(submitButton)
+    currentNode.appendChild(selectButton)
     currentNode.appendChild(cancelButton)
+    currentNode.appendChild(submitButton)
 }
 
 
 
 
-async function editTodo(){ 
+async function editTodo(){
+    console.log(this.parentElement)
     const todoItem = {
         'todo_item': this.parentElement.querySelector('input[name="todoitem"]').value,
     //  'todo_tag': tagChange,
         'date_item': this.parentElement.querySelector('input[name="tododate"]').value,
         'todoid': this.parentElement.querySelector('input[name="todoid"]').value,
         'todo_checked': this.parentElement.querySelector('input[name="todocheck"]').checked,
+        'todo_category': this.parentElement.querySelector('select[name="category"]').value,
     }
     console.log(todoItem)
     try{
